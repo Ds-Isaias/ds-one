@@ -1,5 +1,5 @@
-name: ds_one_novo
-description: Projeto Flutter básico com CI
+name: ds_one
+description: DS-ONE v1 – Assistente IA local
 publish_to: "none"
 version: 1.0.0+1
 
@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cupertino_icons: ^1.0.5
 
 dev_dependencies:
   flutter_test:

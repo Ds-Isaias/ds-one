@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,10 +10,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('DS One Novo')),
-        body: const Center(child: Text('Hello, Flutter!')),
+      title: 'DS-ONE',
+      theme: ThemeData.dark(useMaterial3: true),
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('DS-ONE')),
+      body: const Center(
+        child: Text('Olá, Isaias! 🛠️ DS-ONE está funcionando'),
       ),
     );
   }
 }
+
+
