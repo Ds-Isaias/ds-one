@@ -24,11 +24,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('DS-ONE')),
-      body: const Center(
-        child: Text('Olá, Isaias! 🛠️ DS-ONE está funcionando'),
-      ),
+      body: const Center(child: Text('Olá, Isaias! 🛠️ DS-ONE está funcionando.')),
     );
   }
 }
-
-
