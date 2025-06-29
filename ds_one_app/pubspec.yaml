@@ -8,12 +8,8 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter 
-  cupertino_icons: ^1.0.5 
-  speech_to_text: ^6.3.0
-  avatar_glow: ^2.0.2
-  flutter_tts: ^3.8.4
-  url_launcher: ^6.2.5
+    sdk: flutter
+  cupertino_icons: ^1.0.5
 
 dev_dependencies:
   flutter_test:
