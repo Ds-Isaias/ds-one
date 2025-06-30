@@ -1,19 +1,22 @@
 name: ds_one
-description: DS-ONE v1 – Assistente IA local
+description: DS‑ONE Ultra – Assistente IA pessoal
 publish_to: "none"
-version: 1.0.0+1
+version: 1.1.0-beta
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-  cupertino_icons: ^1.0.5
+flutter:
+sdk: flutter
+cupertino_icons: ^1.0.5
+speech_to_text: ^6.3.0
+avatar_glow: ^2.0.2
+flutter_animate: ^4.5.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+flutter_test:
+sdk: flutter
 
 flutter:
-  uses-material-design: true
+uses-material-design: true
