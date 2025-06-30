@@ -1,10 +1,25 @@
-allprojects {
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.kotlin_version = '1.9.0' // Versão do Kotlin
     repositories {
         google()
-        mavenCentral()
+        mavenCenter()
+    }
+    dependencies {
+        // Android Gradle Plugin (AGP) - Versão 8.1.0 é compatível com Gradle 8.12
+        classpath("com.android.tools.build:gradle:8.1.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
+allprojects {
+    repositories {
+        google()
+        mavenCenter()
+    }
+}
+
+// As linhas a seguir foram mantidas do seu arquivo original
 val newBuildDir: Directory = rootProject.layout.buildDirectory.dir("../../build").get()
 rootProject.layout.buildDirectory.value(newBuildDir)
 
