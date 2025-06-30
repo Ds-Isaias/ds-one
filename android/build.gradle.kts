@@ -1,9 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.9.0" // Alterado para aspas duplas
+    val kotlin_version = "1.9.0" // <-- Alterado de 'ext.kotlin_version' para 'val kotlin_version'
     repositories {
         google()
-        mavenCentral() // <-- Corrigido aqui: "mavenCentral()"
+        mavenCentral()
     }
     dependencies {
         // Android Gradle Plugin (AGP) - Versão 8.1.0 é compatível com Gradle 8.12
@@ -15,7 +15,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        mavenCentral() // <-- Corrigido aqui também: "mavenCentral()"
+        mavenCentral()
     }
 }
 
