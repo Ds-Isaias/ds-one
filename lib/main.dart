@@ -7,139 +7,138 @@ void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-    @override
-      Widget build(BuildContext context) {
-          return MaterialApp(
-                title: 'LYARA | DS‑ONE',
-                      theme: ThemeData.dark(useMaterial3: true),
-                            home: const HomePage(),
-                                  debugShowCheckedModeBanner: false,
-                                      );
-                                        }
-                                        }
 
-                                        class HomePage extends StatefulWidget {
-                                          const HomePage({super.key});
-                                            @override
-                                              State<HomePage> createState() => _HomePageState();
-                                              }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'LYARA | DS.ONE',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(useMaterial3: true),
+      home: const HomePage(),
+    );
+  }
+}
 
-                                              class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-                                                late stt.SpeechToText _speech;
-                                                  final FlutterTts _tts = FlutterTts();
-                                                    bool _isListening = false;
-                                                      String _text = 'Olá, Isaias! Toque no microfone para falar com a LYARA.';
-                                                        late AnimationController _animationController;
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-                                                          @override
-                                                            void initState() {
-                                                                super.initState();
-                                                                    _speech = stt.SpeechToText();
-                                                                        _animationController = AnimationController(
-                                                                              vsync: this,
-                                                                                    duration: const Duration(seconds: 1),
-                                                                                        )..repeat(reverse: true);
-                                                                                            _initTTS();
-                                                                                              }
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
 
-                                                                                                Future<void> _initTTS() async {
-                                                                                                    await _tts.setLanguage("pt-BR");
-                                                                                                        await _tts.setPitch(1.0);
-                                                                                                            await _tts.setSpeechRate(0.9);
-                                                                                                              }
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+  late stt.SpeechToText _speech;
+  final FlutterTts _tts = FlutterTts();
+  bool _isListening = false;
+  String _text = 'Olá, Isaias! Toque no microfone para falar com a LYARA.';
+  late AnimationController _animationController;
 
-                                                                                                                void _listen() async {
-                                                                                                                    if (!_isListening) {
-                                                                                                                          bool available = await _speech.initialize(
-                                                                                                                                  onStatus: (val) {
-                                                                                                                                            if (val == 'done') setState(() => _isListening = false);
-                                                                                                                                                    },
-                                                                                                                                                            onError: (val) => print('Erro: $val'),
-                                                                                                                                                                  );
-                                                                                                                                                                        if (available) {
-                                                                                                                                                                                setState(() => _isListening = true);
-                                                                                                                                                                                        _speech.listen(
-                                                                                                                                                                                                  onResult: (val) {
-                                                                                                                                                                                                              setState(() => _text = val.recognizedWords);
-                                                                                                                                                                                                                          _processarComando(val.recognizedWords.toLowerCase());
-                                                                                                                                                                                                                                    },
-                                                                                                                                                                                                                                            );
-                                                                                                                                                                                                                                                  }
-                                                                                                                                                                                                                                                      } else {
-                                                                                                                                                                                                                                                            setState(() => _isListening = false);
-                                                                                                                                                                                                                                                                  _speech.stop();
-                                                                                                                                                                                                                                                                      }
-                                                                                                                                                                                                                                                                        }
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    )..repeat(reverse: true);
+    _initTTS();
+  }
 
-                                                                                                                                                                                                                                                                          void _processarComando(String comando) async {
-                                                                                                                                                                                                                                                                              if (comando.contains("abrir navegador")) {
-                                                                                                                                                                                                                                                                                    await _tts.speak("Abrindo navegador agora");
-                                                                                                                                                                                                                                                                                          _abrirUrl("https://www.google.com");
-                                                                                                                                                                                                                                                                                              } else if (comando.contains("mostrar clima")) {
-                                                                                                                                                                                                                                                                                                    await _tts.speak("Mostrando o clima agora");
-                                                                                                                                                                                                                                                                                                          _abrirUrl("https://www.climatempo.com.br/");
-                                                                                                                                                                                                                                                                                                              } else if (comando.contains("que horas são")) {
-                                                                                                                                                                                                                                                                                                                    final hora = TimeOfDay.now();
-                                                                                                                                                                                                                                                                                                                          await _tts.speak("Agora são ${hora.hour} horas e ${hora.minute} minutos");
-                                                                                                                                                                                                                                                                                                                              } else if (comando.contains("ler mensagem")) {
-                                                                                                                                                                                                                                                                                                                                    await _tts.speak("Você não possui novas mensagens");
-                                                                                                                                                                                                                                                                                                                                        } else {
-                                                                                                                                                                                                                                                                                                                                              await _tts.speak("Comando não reconhecido, tente novamente.");
-                                                                                                                                                                                                                                                                                                                                                  }
-                                                                                                                                                                                                                                                                                                                                                    }
+  Future<void> _initTTS() async {
+    await _tts.setLanguage("pt-BR");
+    _tts.setPitch(1.0);
+    await _tts.setSpeechRate(0.9);
+  }
 
-                                                                                                                                                                                                                                                                                                                                                      Future<void> _abrirUrl(String url) async {
-                                                                                                                                                                                                                                                                                                                                                          final uri = Uri.parse(url);
-                                                                                                                                                                                                                                                                                                                                                              if (await canLaunchUrl(uri)) {
-                                                                                                                                                                                                                                                                                                                                                                    await launchUrl(uri);
-                                                                                                                                                                                                                                                                                                                                                                        } else {
-                                                                                                                                                                                                                                                                                                                                                                              await _tts.speak("Não consegui abrir o navegador.");
-                                                                                                                                                                                                                                                                                                                                                                                  }
-                                                                                                                                                                                                                                                                                                                                                                                    }
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => setState(() => _isListening = val != 'done'),
+        onError: (val) => print('Erro: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) {
+            setState(() => _text = val.recognizedWords);
+            _processarComando(val.recognizedWords.toLowerCase());
+          },
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
 
-                                                                                                                                                                                                                                                                                                                                                                                      @override
-                                                                                                                                                                                                                                                                                                                                                                                        void dispose() {
-                                                                                                                                                                                                                                                                                                                                                                                            _animationController.dispose();
-                                                                                                                                                                                                                                                                                                                                                                                                _speech.stop();
-                                                                                                                                                                                                                                                                                                                                                                                                    super.dispose();
-                                                                                                                                                                                                                                                                                                                                                                                                      }
+  void _processarComando(String comando) async {
+    if (comando.contains("abrir navegador")) {
+      await _tts.speak("Abrindo navegador agora");
+      _abrirUrl("https://www.google.com");
+    } else if (comando.contains("mostrar clima")) {
+      await _tts.speak("Mostrando o clima agora");
+      _abrirUrl("https://www.climatempo.com.br/");
+    } else if (comando.contains("que horas são")) {
+      final hora = TimeOfDay.now();
+      await _tts.speak("Agora são ${hora.hour} horas e ${hora.minute} minutos");
+    } else if (comando.contains("ler mensagem")) {
+      await _tts.speak("Você não possui novas mensagens");
+    } else {
+      await _tts.speak("Comando não reconhecido, tente novamente.");
+    }
+  }
 
-                                                                                                                                                                                                                                                                                                                                                                                                        @override
-                                                                                                                                                                                                                                                                                                                                                                                                          Widget build(BuildContext context) {
-                                                                                                                                                                                                                                                                                                                                                                                                              return Scaffold(
-                                                                                                                                                                                                                                                                                                                                                                                                                    appBar: AppBar(title: const Text('DS‑ONE | LYARA')),
-                                                                                                                                                                                                                                                                                                                                                                                                                          body: Center(
-                                                                                                                                                                                                                                                                                                                                                                                                                                  child: Padding(
-                                                                                                                                                                                                                                                                                                                                                                                                                                            padding: const EdgeInsets.all(16.0),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                      child: Text(_text, style: const TextStyle(fontSize: 20)),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                              ),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          floatingActionButton: AnimatedBuilder(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  animation: _animationController,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          builder: (context, child) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    return Container(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                width: 72,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            height: 72,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        decoration: BoxDecoration(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      shape: BoxShape.circle,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    boxShadow: _isListening
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ? [
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            BoxShadow(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    color: Colors.blueAccent.withOpacity(0.7),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            blurRadius: 20 * _animationController.value + 10,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    spreadRadius: 1,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          )
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ]
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                : [],
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        child: FloatingActionButton(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      onPressed: _listen,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    child: Icon(_isListening ? Icons.mic : Icons.mic_none),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  },
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ),
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
-    
+  Future<void> _abrirUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      await _tts.speak("Não consegui abrir o navegador.");
+    }
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _speech.stop();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('DS‑ONE | LYARA')),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(_text, style: const TextStyle(fontSize: 20)),
+        ),
+      ),
+      floatingActionButton: AnimatedBuilder(
+        animation: _animationController,
+        builder: (context, child) {
+          return Container(
+            width: 72,
+            height: 72,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: _isListening
+                  ? [
+                      BoxShadow(
+                        color: Colors.blueAccent.withOpacity(0.7),
+                        blurRadius: 20 * _animationController.value + 10,
+                        spreadRadius: 1,
+                      )
+                    ]
+                  : [],
+            ),
+            child: FloatingActionButton(
+              onPressed: _listen,
+              child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
