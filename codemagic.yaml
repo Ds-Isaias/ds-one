@@ -2,7 +2,7 @@ workflows:
   build-android:
     name: Build Android APK (debug)
     environment:
-      flutter: stable
+      flutter: 3.22.1
     scripts:
       - flutter pub get
       - flutter build apk --debug
