@@ -1,5 +1,5 @@
 name: ds_one
-description: Assistente pessoal ultra inteligente - DS-ONE / LYARA
+description: Assistente pessoal ultra inteligente – DS-ONE / LYARA
 publish_to: "none"
 version: 1.1.0+1
 
@@ -44,5 +44,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/animations/
-    - assets/images/
+    - assets/animations/lyara_talking.json
+    - assets/images/invest_icon.png
+    - assets/images/vision_icon.png
