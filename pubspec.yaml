@@ -1,19 +1,31 @@
 name: ds_one
-description: DS-ONE v1 – Assistente IA local
-publish_to: "none"
-version: 1.0.0+1
+description: Projeto DS-ONE com assistente LYARA e modo investimento avançado
+version: 1.1.0+2
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.2.0 <4.0.0"
 
 dependencies:
   flutter:
-    sdk: flutter 
-  cupertino_icons: ^1.0.5 
-  speech_to_text: ^6.6.1
-  avatar_glow: ^2.0.2
-  flutter_tts: ^3.8.4
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  # Dependências para assistente pessoal
+  speech_to_text: ^6.6.0
+  flutter_tts: ^3.8.3
+  http: ^1.1.0
+  provider: ^6.1.1
+  shared_preferences: ^2.2.2
+
+  # Dependências para gráficos e planilhas
+  fl_chart: ^0.66.2
+  syncfusion_flutter_charts: ^24.1.41
+  syncfusion_flutter_xlsio: ^24.1.41
   url_launcher: ^6.2.5
+
+  # Firebase (se for usar mais tarde)
+  # firebase_core: ^2.27.0
 
 dev_dependencies:
   flutter_test:
@@ -21,6 +33,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-dependency_overrides:
-  speech_to_text: 6.6.1
+  assets:
+    - assets/
