@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 
-class VisionMode extends StatefulWidget {
+class VisionMode extends StatelessWidget {
   const VisionMode({super.key});
 
   @override
-  State<VisionMode> createState() => _VisionModeState();
-}
-
-class _VisionModeState extends State<VisionMode> {
-  CameraController? _controller;
-  List<CameraDescription>? cameras;
-
-  @override
-  void initState() {
-    super.initState();
-    _initCamera();
-  }
-
-  Future<void> _initCamera() async {
-    cameras = await availableCameras();
-    _controller = CameraController(cameras![0], ResolutionPreset.medium);
-    await _controller!.initialize();
-    if (mounted) setState(() {});
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Visão Jarvis')),
-      body: Center(
-        child: _controller == null || !_controller!.value.isInitialized
-            ? const CircularProgressIndicator()
-            : CameraPreview(_controller!),
+    return Container(
+      color: Colors.black,
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 30),
+          Icon(Icons.remove_red_eye, color: Colors.cyanAccent, size: 72),
+          const SizedBox(height: 16),
+          const Text(
+            "👁️ Visão Jarvis Ativada",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.cyanAccent),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          const Text(
+            "Câmera conectada.\nAnalisando objetos e textos em tempo real...",
+            style: TextStyle(fontSize: 16, color: Colors.white70),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 40),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blueAccent,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
+            onPressed: () {
+              // Em breve aqui: ativar câmera e detecção de objetos
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("🎥 Câmera ativada")));
+            },
+            icon: const Icon(Icons.camera_alt),
+            label: const Text("Iniciar câmera"),
+          ),
+        ],
       ),
     );
   }
