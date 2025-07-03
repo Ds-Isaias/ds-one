@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'modes/investment_mode.dart';
-import 'modes/vision_mode.dart';
+import 'investment_mode.dart';
+import 'vision_mode.dart';
 
 void main() {
   runApp(const DSOneApp());
