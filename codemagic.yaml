@@ -5,27 +5,15 @@ workflows:
               environment:
                     flutter: stable
                           xcode: false
-                                vars:
-                                        PACKAGE_NAME: "com.dsone.lyara"
-                                              android_signing:
-                                                      - keystore_reference
-                                                          scripts:
-                                                                - name: 📦 Get dependencies
-                                                                        script: flutter pub get
+                              scripts:
+                                    - name: 📦 Get dependencies
+                                            script: flutter pub get
 
-                                                                              - name: 🧹 Clean build
-                                                                                      script: flutter clean
+                                                  - name: 🧹 Clean build
+                                                          script: flutter clean
 
-                                                                                            - name: 🛠 Build APK (Release)
-                                                                                                    script: flutter build apk --release
+                                                                - name: 🛠 Build APK (Release)
+                                                                        script: flutter build apk --release
 
-                                                                                                        artifacts:
-                                                                                                              - build/app/outputs/flutter-apk/app-release.apk
-
-                                                                                                                  publishing:
-                                                                                                                        email:
-                                                                                                                                recipients:
-                                                                                                                                          - isaiasdesouzamkt@gmail.com  # (altere para o seu e-mail real se quiser receber notificações)
-                                                                                                                                                  notify:
-                                                                                                                                                            success: true
-                                                                                                                                                                      failure: true
+                                                                            artifacts:
+                                                                                  - build/app/outputs/flutter-apk/app-release.APK
