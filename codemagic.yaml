@@ -1,14 +1,31 @@
 workflows:
   build-android:
-    name: Build Android APK (debug)
-    environment:
-      flutter: 3.22.1
-    scripts:
-      - flutter pub get
-      - flutter build apk --debug
-    artifacts:
-      - build/app/outputs/flutter-apk/app-debug.apk
-    publishing:
-      email:
-        recipients:
-          - isaiasdesouzamkt@gmail.com
+      name: Build APK Release
+          max_build_duration: 30
+              environment:
+                    flutter: stable
+                          xcode: false
+                                vars:
+                                        PACKAGE_NAME: "com.dsone.lyara"
+                                              android_signing:
+                                                      - keystore_reference
+                                                          scripts:
+                                                                - name: 📦 Get dependencies
+                                                                        script: flutter pub get
+
+                                                                              - name: 🧹 Clean build
+                                                                                      script: flutter clean
+
+                                                                                            - name: 🛠 Build APK (Release)
+                                                                                                    script: flutter build apk --release
+
+                                                                                                        artifacts:
+                                                                                                              - build/app/outputs/flutter-apk/app-release.apk
+
+                                                                                                                  publishing:
+                                                                                                                        email:
+                                                                                                                                recipients:
+                                                                                                                                          - isaiasdesouzamkt@gmail.com  # (altere para o seu e-mail real se quiser receber notificações)
+                                                                                                                                                  notify:
+                                                                                                                                                            success: true
+                                                                                                                                                                      failure: true
