@@ -13,7 +13,7 @@ dependencies:
   cupertino_icons: ^1.0.6
 
   # Áudio e voz
-  speech_to_text: ^6.7.0
+  speech_to_text: ^6.6.1
   flutter_tts: ^4.0.3
 
   # Câmera e Visão
