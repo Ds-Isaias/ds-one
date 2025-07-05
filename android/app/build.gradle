@@ -1,5 +1,3 @@
-// build.gradle (nível de app)
-
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -7,27 +5,28 @@ plugins {
 }
 
 android {
-    namespace "com.dsone.app"
-    compileSdk 34
+    namespace "com.dsone.lyara"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId "com.dsone.app"
-        minSdk 21
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
+        applicationId "com.dsone.lyara"
+        minSdk = 21
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.1.0"
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 flutter {
-    source '../..'
+    source = "../.."
 }
 
 dependencies {
