@@ -1,25 +1,25 @@
 workflows:
   build-android:
-      name: Build APK Release
-          max_build_duration: 30
-              environment:
-                    flutter: stable
-                          xcode:
-                                  name: default
-                                          enabled: false # Mantido como false, já que é um build Android
-                                              scripts:
-                                                    - name: Get dependencies
-                                                            script: |
-                                                                      flutter pub get
+    name: Build APK Release
+    max_build_duration: 30
+    environment:
+      flutter: stable
+      # Removido 'xcode' daqui, pois não é necessário para um build Android
+      # e a estrutura 'name: default' com 'enabled: false' estava incorreta aqui.
+      # Se você precisar de algo relacionado a Xcode, seria em um workflow iOS/macOS.
+    scripts:
+      - name: Get dependencies
+        script: |
+          flutter pub get
 
-                                                                            - name: Clean build
-                                                                                    script: |
-                                                                                              flutter clean
+      - name: Clean build
+        script: |
+          flutter clean
 
-                                                                                                    - name: Build APK
-                                                                                                            script: |
-                                                                                                                      flutter build apk --release
+      - name: Build APK
+        script: |
+          flutter build apk --release
 
-                                                                                                                          artifacts:
-                                                                                                                                - build/app/outputs/flutter-apk/app-release.apk
-                                                                                                                                
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+                       
