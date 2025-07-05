@@ -18,4 +18,4 @@ workflows:
                                                                                                   flutter build apk --release
 
                                                                                                       artifacts:
-                                                                                                            - build/app/outputs/flutter-apk/app-release.apk
+                                                                                                            - build/app/outputs/flutter-apk/app-release.APK
