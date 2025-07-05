@@ -1,11 +1,12 @@
 pluginManagement {
     repositories {
         google()
-        gradlePluginPortal()
         mavenCentral()
-        maven {
-            url "https://storage.googleapis.com/download.flutter.io"
-        }
+        gradlePluginPortal()
+        maven { url "https://storage.googleapis.com/download.flutter.io" }
+    }
+    plugins {
+        id "dev.flutter.flutter-gradle-plugin" version "1.1.2"
     }
 }
 
@@ -14,11 +15,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url "https://storage.googleapis.com/download.flutter.io"
-        }
+        maven { url "https://storage.googleapis.com/download.flutter.io" }
     }
 }
 
-rootProject.name = 'ds_one_app'
-include ':app'
+rootProject.name = "ds_one_app"
+include(":app")
